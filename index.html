@@ -4,6 +4,7 @@
 <title>Happyy Women's Day Harshiitaaaaa</title>
 
 <style>
+
 body{
   margin:0;
   height:100vh;
@@ -16,6 +17,7 @@ body{
 }
 
 /* Flowers */
+
 .flower{
   position:absolute;
   font-size:22px;
@@ -23,11 +25,12 @@ body{
 }
 
 @keyframes float{
-  0%{transform:translateY(100vh);}
-  100%{transform:translateY(-10vh);}
+  0%{transform:translateY(100vh) rotate(0deg);}
+  100%{transform:translateY(-10vh) rotate(360deg);}
 }
 
 /* Envelope */
+
 .envelope{
   position:relative;
   width:320px;
@@ -35,42 +38,56 @@ body{
   background:#d46aa5;
   border-radius:6px;
   cursor:pointer;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
+
+/* Flap */
 
 .flap{
   position:absolute;
   top:0;
   width:0;
   height:0;
+
   border-left:160px solid transparent;
   border-right:160px solid transparent;
-  border-bottom:100px solid #c0548f;
+  border-top:110px solid #c0548f;
+
   transform-origin:top;
-  transition:0.6s;
+  transition:0.8s;
+  z-index:3;
 }
 
 /* Letter */
+
 .letter{
   position:absolute;
   background:white;
   width:280px;
-  height:160px;
+  height:180px;
   left:20px;
   top:20px;
+
   padding:15px;
   box-sizing:border-box;
   text-align:center;
   border-radius:6px;
-  transform:translateY(40px);
-  transition:0.6s;
+
+  transform:translateY(80px);
+  transition:1s;
+  z-index:1;
+
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
+
+/* Open animation */
 
 .open .flap{
   transform:rotateX(180deg);
 }
 
 .open .letter{
-  transform:translateY(-80px);
+  transform:translateY(-120px);
 }
 
 h3{
@@ -82,8 +99,10 @@ p{
   font-size:14px;
   color:#444;
 }
+
 </style>
 </head>
+
 
 <body>
 
@@ -94,25 +113,31 @@ p{
 <div class="flower" style="left:75%; animation-delay:1s">🌺</div>
 <div class="flower" style="left:90%; animation-delay:3s">🌸</div>
 
+
 <div class="envelope" onclick="openCard(this)">
-  <div class="flap"></div>
 
-  <div class="letter">
-    <h3>Happy Women's Day</h3>
+<div class="flap"></div>
 
-    <p>
-    Sometimes people don’t say it enough, but the effort, patience, and strength you show everyday really reallllyyyy deserve to be appreciated. Whether it’s the way you handle your responsibilities, support the people around you, and ik how much you carry each dayy, it doesn’t go unnoticed. Everyone faces their own challenges, but the women like you face themm with courage and handle them. Today is just a small reminder that all of that matters and that the impact you have on the people around you is soooo greatt. I hope you continue doing the things that make you happy, achieving the goals and moving forward with the same confidence and strength you always show! Wishing you a day where you feel appreciated, respected, and proud of everything you’ve done and everything you’re still going to accomplish 🫂🫂🫂
-    </p>
+<div class="letter">
 
-  </div>
+<h3>Happy Women's Day</h3>
+
+<p>
+Sometimes people don’t say it enough, but the effort, patience, and strength you show everyday really reallllyyyy deserve to be appreciated. Whether it’s the way you handle your responsibilities, support the people around you, and ik how much you carry each dayy, it doesn’t go unnoticed. Everyone faces their own challenges, but the women like you face themm with courage and handle them. Today is just a small reminder that all of that matters and that the impact you have on the people around you is soooo greatt. I hope you continue doing the things that make you happy, achieving the goals and moving forward with the same confidence and strength you always show! Wishing you a day where you feel appreciated, respected, and proud of everything you’ve done and everything you’re still going to accomplish 🫂🫂🫂
+</p>
+
 </div>
 
+</div>
+
+
 <script>
+
 function openCard(card){
   card.classList.toggle("open");
 }
+
 </script>
 
 </body>
-
 </html>
