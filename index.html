@@ -4,20 +4,31 @@
 <title>Happy Women's Day</title>
 
 <style>
-
 body{
   margin:0;
   font-family:Arial, sans-serif;
   background:#f3f6ff;
-  height:250vh; /* allows scrolling */
-}
-
-/* envelope container */
-.scene{
-  position:sticky;
-  top:120px;
+  height:100vh;
+  overflow:hidden; /* page won't scroll */
   display:flex;
   justify-content:center;
+  align-items:center;
+}
+
+/* floating flowers */
+.flower{
+  position:fixed;
+  font-size:28px;
+  animation:float 12s linear infinite;
+}
+@keyframes float{
+  0%{transform:translateY(100vh);}
+  100%{transform:translateY(-10vh);}
+}
+
+/* scene container */
+.scene{
+  position:relative;
 }
 
 /* envelope */
@@ -27,8 +38,11 @@ body{
   height:320px;
   background:#d46aa5;
   border-radius:12px;
-  box-shadow:0 10px 30px rgba(0,0,0,0.25);
+  box-shadow:0 10px 35px rgba(0,0,0,0.25);
   overflow:hidden;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
 }
 
 /* flap */
@@ -52,11 +66,10 @@ body{
 
 /* letter */
 .letter{
-  position:absolute;
+  position:relative;
   width:460px;
-  left:30px;
-  top:230px;  /* important: scroll math starts from here */
   background:white;
+  margin-top:230px; /* start hidden inside envelope */
   padding:35px;
   box-sizing:border-box;
   border-radius:10px;
@@ -65,18 +78,21 @@ body{
   color:#444;
   box-shadow:0 10px 25px rgba(0,0,0,0.2);
   font-size:18px;
+  height:0; /* collapsed initially */
+  overflow-y:hidden; /* only scroll when fully expanded */
+  transition:height 0.5s ease, margin-top 0.5s ease;
 }
 
-/* flowers */
-.flower{
-  position:fixed;
-  font-size:26px;
-  animation:float 10s linear infinite;
+/* scrollable class */
+.letter.open{
+  height:400px; /* how tall the letter can expand */
+  overflow-y:auto;
+  margin-top:40px; /* fully pulled out */
 }
 
-@keyframes float{
-  0%{transform:translateY(100vh)}
-  100%{transform:translateY(-10vh)}
+h3{
+  margin-top:0;
+  color:#7a2c5c;
 }
 
 </style>
@@ -91,40 +107,25 @@ body{
 <div class="flower" style="left:90%;animation-delay:3s">🌸</div>
 
 <div class="scene">
-
-<div class="envelope" id="env">
-<div class="flap"></div>
-
-<div class="letter" id="letter">
-
-<h3>Happy Women's Day</h3>
-
-<p>
+  <div class="envelope" id="env" onclick="openLetter()">
+    <div class="flap"></div>
+    <div class="letter" id="letter">
+      <h3>Happy Women's Day</h3>
+      <p>
 Sometimes people don’t say it enough, but the effort, patience, and strength you show everyday really deserve to be appreciated. Whether it’s the way you handle responsibilities, support the people around you, or keep moving forward even on difficult days, it all matters more than you probably realise. Everyone faces their own challenges, but the way you deal with them shows a lot of courage and determination. Today is simply a reminder that everything you do has value and that the impact you leave on people around you is real. I hope you continue doing the things that make you happy, achieving the goals you set for yourself, and moving forward with the same confidence and strength you always show. Wishing you a day where you feel appreciated, respected, and proud of everything you’ve done and everything you’re still going to accomplish.
-</p>
-
-</div>
-</div>
+      </p>
+    </div>
+  </div>
 </div>
 
 <script>
-
-const letter = document.getElementById("letter");
 const envelope = document.getElementById("env");
+const letter = document.getElementById("letter");
 
-window.addEventListener("scroll", () => {
-
-let scroll = window.scrollY;
-
-if(scroll > 20){
+function openLetter(){
   envelope.classList.add("open");
+  letter.classList.add("open"); // expands letter and enables internal scroll
 }
-
-/* letter moves up as you scroll */
-letter.style.top = (230 - scroll) + "px";
-
-});
-
 </script>
 
 </body>
