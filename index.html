@@ -63,7 +63,7 @@ body{
   width:380px;
   background:white;
   left:10px;
-  top:250px; /* fully hidden initially */
+  top:220px;
   padding:25px;
   box-sizing:border-box;
   border-radius:10px;
@@ -73,8 +73,8 @@ body{
   color:#444;
   box-shadow:0 10px 30px rgba(0,0,0,0.25);
   z-index:2;
-  transition:top 0.1s linear, height 0.1s linear;
-  height:0; /* starts collapsed */
+  transition:top 0.25s ease, height 0.25s ease;
+  height:60px;
   overflow:hidden;
 }
 
@@ -125,14 +125,13 @@ function openFlap(){
   }
 }
 
-// scroll simulation: pull letter as you drag mouse / touch
 let startY = null;
-let letterTop = 250;
-let maxHeight = 600; // maximum expanded height of letter
+let letterTop = 220;
+let maxHeight = 600;
 
 function moveLetter(dy){
   if(letterFullyOut) return;
-  letterTop -= dy;
+  letterTop += dy;
   if(letterTop < 40) letterTop = 40;
   let newHeight = maxHeight - letterTop + 40;
   if(newHeight > maxHeight) newHeight = maxHeight;
@@ -141,7 +140,6 @@ function moveLetter(dy){
   if(letterTop === 40) letterFullyOut = true;
 }
 
-// mouse drag
 let dragging = false;
 document.addEventListener("mousedown",(e)=>{
   if(flapOpened){
@@ -158,7 +156,6 @@ document.addEventListener("mousemove",(e)=>{
 });
 document.addEventListener("mouseup",()=>{ dragging=false; });
 
-// touch for mobile
 document.addEventListener("touchstart",(e)=>{
   if(flapOpened){
     dragging = true;
@@ -177,4 +174,4 @@ document.addEventListener("touchend",()=>{ dragging=false; });
 
 </script>
 </body>
-</html>
+    </html>
