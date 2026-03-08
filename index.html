@@ -4,32 +4,20 @@
 <title>Happy Women's Day</title>
 
 <style>
+
 body{
   margin:0;
   font-family:Arial, sans-serif;
   background:#f3f6ff;
-  height:220vh;
+  height:250vh;
+}
+
+/* envelope container */
+.scene{
+  position:sticky;
+  top:120px;
   display:flex;
   justify-content:center;
-}
-
-/* flowers */
-.flower{
-  position:fixed;
-  font-size:28px;
-  animation:float 12s linear infinite;
-}
-@keyframes float{
-  0%{transform:translateY(100vh);}
-  100%{transform:translateY(-10vh);}
-}
-
-/* scene */
-.scene{
-  position:fixed;
-  top:40%;
-  left:50%;
-  transform:translate(-50%,-50%);
 }
 
 /* envelope */
@@ -39,7 +27,7 @@ body{
   height:250px;
   background:#d46aa5;
   border-radius:12px;
-  box-shadow:0 10px 35px rgba(0,0,0,0.25);
+  box-shadow:0 10px 30px rgba(0,0,0,0.25);
   overflow:hidden;
 }
 
@@ -66,23 +54,28 @@ body{
 .letter{
   position:absolute;
   width:360px;
-  background:white;
   left:20px;
   top:230px;
+  background:white;
   padding:25px;
   box-sizing:border-box;
   border-radius:10px;
   text-align:center;
-  font-size:16px;
   line-height:1.6;
   color:#444;
-  box-shadow:0 10px 30px rgba(0,0,0,0.25);
-  z-index:2;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
 
-h3{
-  margin-top:0;
-  color:#7a2c5c;
+/* flowers */
+.flower{
+  position:fixed;
+  font-size:26px;
+  animation:float 10s linear infinite;
+}
+
+@keyframes float{
+  0%{transform:translateY(100vh)}
+  100%{transform:translateY(-10vh)}
 }
 
 </style>
@@ -118,21 +111,15 @@ Sometimes people don’t say it enough, but the effort, patience, and strength y
 const letter = document.getElementById("letter");
 const envelope = document.getElementById("env");
 
-window.addEventListener("scroll", function(){
+window.addEventListener("scroll", () => {
 
 let scroll = window.scrollY;
 
 if(scroll > 20){
-  envelope.classList.add("open");
+envelope.classList.add("open");
 }
 
-let move = 230 - scroll;
-
-if(move < -900){
-  move = -900;
-}
-
-letter.style.top = move + "px";
+letter.style.top = (230 - scroll) + "px";
 
 });
 
