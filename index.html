@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Happyy Women's Day Harshiitaaaaa</title>
+<title>Happy Women's Day</title>
 
 <style>
 body{
   margin:0;
   font-family:Arial, sans-serif;
   background:#f3f6ff;
+  height:220vh;
   display:flex;
   justify-content:center;
-  align-items:flex-start;
-  height:200vh;
-  overflow-x:hidden;
 }
 
-/* floating flowers */
+/* flowers */
 .flower{
-  position:absolute;
+  position:fixed;
   font-size:28px;
-  animation:float 10s linear infinite;
+  animation:float 12s linear infinite;
 }
 @keyframes float{
   0%{transform:translateY(100vh);}
@@ -29,7 +27,7 @@ body{
 /* scene */
 .scene{
   position:fixed;
-  top:35%;
+  top:40%;
   left:50%;
   transform:translate(-50%,-50%);
 }
@@ -41,7 +39,7 @@ body{
   height:250px;
   background:#d46aa5;
   border-radius:12px;
-  box-shadow:0 12px 35px rgba(0,0,0,0.25);
+  box-shadow:0 10px 35px rgba(0,0,0,0.25);
   overflow:hidden;
 }
 
@@ -67,10 +65,10 @@ body{
 /* letter */
 .letter{
   position:absolute;
-  width:380px;
+  width:360px;
   background:white;
-  left:10px;
-  top:220px;
+  left:20px;
+  top:230px;
   padding:25px;
   box-sizing:border-box;
   border-radius:10px;
@@ -83,21 +81,20 @@ body{
 }
 
 h3{
-  margin-top:5px;
-  font-size:24px;
+  margin-top:0;
   color:#7a2c5c;
 }
-</style>
 
+</style>
 </head>
 
 <body>
 
 <div class="flower" style="left:10%">🌸</div>
-<div class="flower" style="left:25%; animation-delay:2s">🌷</div>
-<div class="flower" style="left:50%; animation-delay:4s">🌼</div>
-<div class="flower" style="left:75%; animation-delay:1s">🌺</div>
-<div class="flower" style="left:90%; animation-delay:3s">🌸</div>
+<div class="flower" style="left:30%;animation-delay:2s">🌷</div>
+<div class="flower" style="left:50%;animation-delay:4s">🌼</div>
+<div class="flower" style="left:70%;animation-delay:1s">🌺</div>
+<div class="flower" style="left:90%;animation-delay:3s">🌸</div>
 
 <div class="scene">
 
@@ -109,7 +106,7 @@ h3{
 <h3>Happy Women's Day</h3>
 
 <p>
-Sometimes people don’t say it enough, but the effort, patience, and strength you show everyday really reallllyyyy deserve to be appreciated. Whether it’s the way you handle your responsibilities, support the people around you, and ik how much you carry each dayy, it doesn’t go unnoticed. Everyone faces their own challenges, but the women like you face themm with courage and handle them. Today is just a small reminder that all of that matters and that the impact you have on the people around you is soooo greatt. I hope you continue doing the things that make you happy, achieving the goals and moving forward with the same confidence and strength you always show! Wishing you a day where you feel appreciated, respected, and proud of everything you’ve done and everything you’re still going to accomplish 🫂🫂🫂
+Sometimes people don’t say it enough, but the effort, patience, and strength you show everyday really deserve to be appreciated. Whether it’s the way you handle responsibilities, support the people around you, or keep moving forward even on difficult days, it all matters more than you probably realise. Everyone faces their own challenges, but the way you deal with them shows a lot of courage and determination. Today is simply a reminder that everything you do has value and that the impact you leave on people around you is real. I hope you continue doing the things that make you happy, achieving the goals you set for yourself, and moving forward with the same confidence and strength you always show. Wishing you a day where you feel appreciated, respected, and proud of everything you’ve done and everything you’re still going to accomplish.
 </p>
 
 </div>
@@ -118,24 +115,24 @@ Sometimes people don’t say it enough, but the effort, patience, and strength y
 
 <script>
 
-const letter=document.getElementById("letter");
-const envelope=document.getElementById("env");
+const letter = document.getElementById("letter");
+const envelope = document.getElementById("env");
 
-window.addEventListener("scroll",()=>{
+window.addEventListener("scroll", function(){
 
-let scroll=window.scrollY;
+let scroll = window.scrollY;
 
-if(scroll>10){
-envelope.classList.add("open");
+if(scroll > 20){
+  envelope.classList.add("open");
 }
 
-let newTop=220-scroll;
+let move = 230 - scroll;
 
-if(newTop<40){
-newTop=40;
+if(move < -900){
+  move = -900;
 }
 
-letter.style.top=newTop+"px";
+letter.style.top = move + "px";
 
 });
 
