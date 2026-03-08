@@ -9,7 +9,7 @@ body{
   margin:0;
   font-family:Arial, sans-serif;
   background:#f3f6ff;
-  height:250vh;
+  height:250vh; /* allows scrolling */
 }
 
 /* envelope container */
@@ -55,7 +55,7 @@ body{
   position:absolute;
   width:460px;
   left:30px;
-  top:300px;
+  top:230px;  /* important: scroll math starts from here */
   background:white;
   padding:35px;
   box-sizing:border-box;
@@ -117,10 +117,11 @@ window.addEventListener("scroll", () => {
 let scroll = window.scrollY;
 
 if(scroll > 20){
-envelope.classList.add("open");
+  envelope.classList.add("open");
 }
 
-letter.style.top = (300 - scroll) + "px";
+/* letter moves up as you scroll */
+letter.style.top = (230 - scroll) + "px";
 
 });
 
