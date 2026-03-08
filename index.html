@@ -7,8 +7,11 @@ body{
   margin:0;
   font-family:Arial, sans-serif;
   background:#f3f6ff;
-  overflow-x:hidden;
-  height:200vh; /* allow scrolling */
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  overflow:hidden;
 }
 
 /* floating flowers */
@@ -25,10 +28,6 @@ body{
 /* scene container */
 .scene{
   position:relative;
-  display:flex;
-  justify-content:center;
-  margin-top:150px;
-  height:0; /* envelope controls its own height */
 }
 
 /* envelope */
@@ -37,8 +36,8 @@ body{
   width:400px;
   height:250px;
   background:#d46aa5;
-  border-radius:10px;
-  box-shadow:0 12px 30px rgba(0,0,0,0.25);
+  border-radius:12px;
+  box-shadow:0 12px 35px rgba(0,0,0,0.25);
   overflow:hidden;
   cursor:pointer;
 }
@@ -52,7 +51,7 @@ body{
   height:0;
   border-left:200px solid transparent;
   border-right:200px solid transparent;
-  border-top:140px solid #c0548f;
+  border-top:150px solid #c0548f;
   transform-origin:top;
   transition:0.6s;
   z-index:3;
@@ -64,7 +63,7 @@ body{
   width:380px;
   background:white;
   left:10px;
-  top:250px; /* start fully hidden */
+  top:250px; /* fully hidden initially */
   padding:25px;
   box-sizing:border-box;
   border-radius:10px;
@@ -74,7 +73,9 @@ body{
   color:#444;
   box-shadow:0 10px 30px rgba(0,0,0,0.25);
   z-index:2;
-  transition:top 0.1s linear; /* smooth movement */
+  transition:top 0.1s linear, height 0.1s linear;
+  height:0; /* starts collapsed */
+  overflow:hidden;
 }
 
 /* open flap */
@@ -82,7 +83,7 @@ body{
   transform:rotateX(180deg);
 }
 
-/* text styles */
+/* text */
 h3{
   margin-top:5px;
   font-size:24px;
@@ -114,8 +115,9 @@ Sometimes people don’t say it enough, but the effort, patience, and strength y
 <script>
 const envelope = document.getElementById("env");
 const letter = document.getElementById("letter");
-
 let flapOpened = false;
+let letterFullyOut = false;
+
 function openFlap(){
   if(!flapOpened){
     envelope.classList.add("open");
@@ -123,19 +125,56 @@ function openFlap(){
   }
 }
 
-// scroll animation
-window.addEventListener("scroll",()=>{
-  if(!flapOpened) return; // only move after flap opens
-  let scrollY = window.scrollY;
-  const startTop = 250; // hidden position
-  const endTop = 40;    // fully visible position
-  const scrollRange = 300; // pixels of scroll to pull letter fully
+// scroll simulation: pull letter as you drag mouse / touch
+let startY = null;
+let letterTop = 250;
+let maxHeight = 600; // maximum expanded height of letter
 
-  // calculate new top
-  let newTop = startTop - (scrollY/scrollRange)*(startTop - endTop);
-  if(newTop < endTop) newTop = endTop; // stop at full letter
-  letter.style.top = newTop + "px";
+function moveLetter(dy){
+  if(letterFullyOut) return;
+  letterTop -= dy;
+  if(letterTop < 40) letterTop = 40;
+  let newHeight = maxHeight - letterTop + 40;
+  if(newHeight > maxHeight) newHeight = maxHeight;
+  letter.style.top = letterTop + "px";
+  letter.style.height = newHeight + "px";
+  if(letterTop === 40) letterFullyOut = true;
+}
+
+// mouse drag
+let dragging = false;
+document.addEventListener("mousedown",(e)=>{
+  if(flapOpened){
+    dragging = true;
+    startY = e.clientY;
+  }
 });
+document.addEventListener("mousemove",(e)=>{
+  if(dragging){
+    let dy = e.clientY - startY;
+    startY = e.clientY;
+    moveLetter(dy);
+  }
+});
+document.addEventListener("mouseup",()=>{ dragging=false; });
+
+// touch for mobile
+document.addEventListener("touchstart",(e)=>{
+  if(flapOpened){
+    dragging = true;
+    startY = e.touches[0].clientY;
+  }
+});
+document.addEventListener("touchmove",(e)=>{
+  if(dragging){
+    let dy = e.touches[0].clientY - startY;
+    startY = e.touches[0].clientY;
+    moveLetter(dy);
+    e.preventDefault();
+  }
+});
+document.addEventListener("touchend",()=>{ dragging=false; });
+
 </script>
 </body>
-  </html>
+</html>
