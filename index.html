@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>Happyy Women's Day Harshiitaaaaa</title>
+
 <style>
 body{
   margin:0;
@@ -9,9 +10,9 @@ body{
   background:#f3f6ff;
   display:flex;
   justify-content:center;
-  align-items:center;
-  height:100vh;
-  overflow:hidden;
+  align-items:flex-start;
+  height:200vh;
+  overflow-x:hidden;
 }
 
 /* floating flowers */
@@ -25,9 +26,12 @@ body{
   100%{transform:translateY(-10vh);}
 }
 
-/* scene container */
+/* scene */
 .scene{
-  position:relative;
+  position:fixed;
+  top:35%;
+  left:50%;
+  transform:translate(-50%,-50%);
 }
 
 /* envelope */
@@ -39,7 +43,6 @@ body{
   border-radius:12px;
   box-shadow:0 12px 35px rgba(0,0,0,0.25);
   overflow:hidden;
-  cursor:pointer;
 }
 
 /* flap */
@@ -55,6 +58,10 @@ body{
   transform-origin:top;
   transition:0.6s;
   z-index:3;
+}
+
+.open .flap{
+  transform:rotateX(180deg);
 }
 
 /* letter */
@@ -73,24 +80,17 @@ body{
   color:#444;
   box-shadow:0 10px 30px rgba(0,0,0,0.25);
   z-index:2;
-  transition:top 0.2s ease, height 0.2s ease;
-  height:60px;
-  overflow:hidden;
 }
 
-/* open flap */
-.open .flap{
-  transform:rotateX(180deg);
-}
-
-/* text */
 h3{
   margin-top:5px;
   font-size:24px;
   color:#7a2c5c;
 }
 </style>
+
 </head>
+
 <body>
 
 <div class="flower" style="left:10%">🌸</div>
@@ -100,96 +100,46 @@ h3{
 <div class="flower" style="left:90%; animation-delay:3s">🌸</div>
 
 <div class="scene">
-  <div class="envelope" id="env" onclick="openFlap()">
-    <div class="flap"></div>
 
-    <div class="letter" id="letter">
-      <h3>Happy Women's Day</h3>
-      <p>
+<div class="envelope" id="env">
+<div class="flap"></div>
+
+<div class="letter" id="letter">
+
+<h3>Happy Women's Day</h3>
+
+<p>
 Sometimes people don’t say it enough, but the effort, patience, and strength you show everyday really reallllyyyy deserve to be appreciated. Whether it’s the way you handle your responsibilities, support the people around you, and ik how much you carry each dayy, it doesn’t go unnoticed. Everyone faces their own challenges, but the women like you face themm with courage and handle them. Today is just a small reminder that all of that matters and that the impact you have on the people around you is soooo greatt. I hope you continue doing the things that make you happy, achieving the goals and moving forward with the same confidence and strength you always show! Wishing you a day where you feel appreciated, respected, and proud of everything you’ve done and everything you’re still going to accomplish 🫂🫂🫂
-      </p>
-    </div>
+</p>
 
-  </div>
+</div>
+</div>
 </div>
 
 <script>
-const envelope = document.getElementById("env");
-const letter = document.getElementById("letter");
 
-let flapOpened=false;
-let letterFullyOut=false;
+const letter=document.getElementById("letter");
+const envelope=document.getElementById("env");
 
-function openFlap(){
-  if(!flapOpened){
-    envelope.classList.add("open");
-    flapOpened=true;
-  }
+window.addEventListener("scroll",()=>{
+
+let scroll=window.scrollY;
+
+if(scroll>10){
+envelope.classList.add("open");
 }
 
-let startY=null;
-let letterTop=220;
-let maxHeight=700;
+let newTop=220-scroll;
 
-function moveLetter(dy){
-  if(letterFullyOut) return;
-
-  letterTop -= dy;
-
-  if(letterTop < 40){
-    letterTop=40;
-    letterFullyOut=true;
-
-    letter.style.top="40px";
-    letter.style.height="700px";
-    letter.style.overflowY="auto";   // allow scrolling
-    return;
-  }
-
-  let newHeight=maxHeight-letterTop+40;
-
-  letter.style.top=letterTop+"px";
-  letter.style.height=newHeight+"px";
+if(newTop<40){
+newTop=40;
 }
 
-/* mouse */
-let dragging=false;
+letter.style.top=newTop+"px";
 
-document.addEventListener("mousedown",(e)=>{
-  if(flapOpened){
-    dragging=true;
-    startY=e.clientY;
-  }
 });
-
-document.addEventListener("mousemove",(e)=>{
-  if(dragging){
-    let dy=e.clientY-startY;
-    startY=e.clientY;
-    moveLetter(dy);
-  }
-});
-
-document.addEventListener("mouseup",()=>dragging=false);
-
-/* touch */
-document.addEventListener("touchstart",(e)=>{
-  if(flapOpened){
-    dragging=true;
-    startY=e.touches[0].clientY;
-  }
-});
-
-document.addEventListener("touchmove",(e)=>{
-  if(dragging){
-    let dy=e.touches[0].clientY-startY;
-    startY=e.touches[0].clientY;
-    moveLetter(dy);
-  }
-});
-
-document.addEventListener("touchend",()=>dragging=false);
 
 </script>
+
 </body>
 </html>
