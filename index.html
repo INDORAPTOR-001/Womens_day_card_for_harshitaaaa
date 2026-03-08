@@ -18,7 +18,7 @@ body{
 /* floating flowers */
 .flower{
   position:fixed;
-  font-size:32px; /* slightly bigger */
+  font-size:32px;
   animation:float 12s linear infinite;
 }
 @keyframes float{
@@ -34,8 +34,8 @@ body{
 /* envelope */
 .envelope{
   position:relative;
-  width:600px;  /* bigger */
-  height:380px; /* bigger */
+  width:600px;
+  height:380px;
   background:#d46aa5;
   border-radius:12px;
   box-shadow:0 10px 35px rgba(0,0,0,0.25);
@@ -67,32 +67,33 @@ body{
 /* letter */
 .letter{
   position:relative;
-  width:520px;  /* bigger */
+  width:520px;
   background:white;
   margin-top:280px; /* start hidden */
-  padding:40px;      /* more padding */
+  padding:40px;
   box-sizing:border-box;
   border-radius:10px;
   text-align:center;
-  line-height:1.8; /* more readable */
+  line-height:1.8;
   color:#444;
   box-shadow:0 10px 25px rgba(0,0,0,0.2);
-  font-size:22px; /* bigger text */
+  font-size:22px;
   height:0;
   overflow-y:hidden;
   transition:height 0.5s ease, margin-top 0.5s ease;
+  white-space: pre-wrap; /* preserve exact text formatting */
 }
 
 .letter.open{
-  height:500px;   /* bigger letter height */
+  height:500px;
   overflow-y:auto;
-  margin-top:40px; /* fully pulled out */
+  margin-top:40px;
 }
 
 h3{
   margin-top:0;
   color:#7a2c5c;
-  font-size:28px; /* bigger heading */
+  font-size:28px;
 }
 
 </style>
@@ -110,7 +111,7 @@ h3{
   <div class="envelope" id="env" onclick="openLetter()">
     <div class="flap"></div>
     <div class="letter" id="letter">
-      <h3>Happy Women's Day Harshitaaaa ❤️</h3>
+      <h3>Happy Women's Day Harshiitaaaaa ❤️</h3>
       <p>
        Sometimes people don’t say it enough, but the effort, patience, and strength you show everyday really reallllyyyy deserve to be appreciated. Whether it’s the way you handle your responsibilities, support the people around you, and ik how much you carry each dayy, it doesn’t go unnoticed. Everyone faces their own challenges, but the women like you face themm with courage and handle them. Today is just a small reminder that all of that matters and that the impact you have on the people around you is soooo greatt. I hope you continue doing the things that make you happy, achieving the goals and moving forward with the same confidence and strength you always show! Wishing you a day where you feel appreciated, respected, and proud of everything you’ve done and everything you’re still going to accomplish 🫂🫂🫂
       </p>
@@ -124,10 +125,9 @@ const letter = document.getElementById("letter");
 
 function openLetter(){
   envelope.classList.add("open");
-  letter.classList.add("open"); // expands letter and enables scroll
+  letter.classList.add("open");
 }
 </script>
 
 </body>
 </html>
-
