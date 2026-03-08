@@ -23,8 +23,8 @@ body{
 /* envelope */
 .envelope{
   position:relative;
-  width:400px;
-  height:250px;
+  width:520px;
+  height:320px;
   background:#d46aa5;
   border-radius:12px;
   box-shadow:0 10px 30px rgba(0,0,0,0.25);
@@ -38,9 +38,9 @@ body{
   left:0;
   width:0;
   height:0;
-  border-left:200px solid transparent;
-  border-right:200px solid transparent;
-  border-top:150px solid #c0548f;
+  border-left:260px solid transparent;
+  border-right:260px solid transparent;
+  border-top:190px solid #c0548f;
   transform-origin:top;
   transition:0.6s;
   z-index:3;
@@ -53,17 +53,18 @@ body{
 /* letter */
 .letter{
   position:absolute;
-  width:360px;
-  left:20px;
-  top:230px;
+  width:460px;
+  left:30px;
+  top:300px;
   background:white;
-  padding:25px;
+  padding:35px;
   box-sizing:border-box;
   border-radius:10px;
   text-align:center;
   line-height:1.6;
   color:#444;
   box-shadow:0 10px 25px rgba(0,0,0,0.2);
+  font-size:18px;
 }
 
 /* flowers */
@@ -119,7 +120,7 @@ if(scroll > 20){
 envelope.classList.add("open");
 }
 
-letter.style.top = (230 - scroll) + "px";
+letter.style.top = (300 - scroll) + "px";
 
 });
 
