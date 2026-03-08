@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Happyy Women's Day Harshiitaaaaa</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#f3f6ff;
+  font-family:Arial, sans-serif;
+  overflow:hidden;
+}
+
+/* Flowers */
+.flower{
+  position:absolute;
+  font-size:22px;
+  animation:float 8s linear infinite;
+}
+
+@keyframes float{
+  0%{transform:translateY(100vh);}
+  100%{transform:translateY(-10vh);}
+}
+
+/* Envelope */
+.envelope{
+  position:relative;
+  width:320px;
+  height:200px;
+  background:#d46aa5;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.flap{
+  position:absolute;
+  top:0;
+  width:0;
+  height:0;
+  border-left:160px solid transparent;
+  border-right:160px solid transparent;
+  border-bottom:100px solid #c0548f;
+  transform-origin:top;
+  transition:0.6s;
+}
+
+/* Letter */
+.letter{
+  position:absolute;
+  background:white;
+  width:280px;
+  height:160px;
+  left:20px;
+  top:20px;
+  padding:15px;
+  box-sizing:border-box;
+  text-align:center;
+  border-radius:6px;
+  transform:translateY(40px);
+  transition:0.6s;
+}
+
+.open .flap{
+  transform:rotateX(180deg);
+}
+
+.open .letter{
+  transform:translateY(-80px);
+}
+
+h3{
+  margin-top:5px;
+  color:#7a2c5c;
+}
+
+p{
+  font-size:14px;
+  color:#444;
+}
+</style>
+</head>
+
+<body>
+
+<!-- floating flowers -->
+<div class="flower" style="left:10%">🌸</div>
+<div class="flower" style="left:25%; animation-delay:2s">🌷</div>
+<div class="flower" style="left:50%; animation-delay:4s">🌼</div>
+<div class="flower" style="left:75%; animation-delay:1s">🌺</div>
+<div class="flower" style="left:90%; animation-delay:3s">🌸</div>
+
+<div class="envelope" onclick="openCard(this)">
+  <div class="flap"></div>
+
+  <div class="letter">
+    <h3>Happy Women's Day</h3>
+
+    <p>
+    Sometimes people don’t say it enough, but the effort, patience, and strength you show everyday really reallllyyyy deserve to be appreciated. Whether it’s the way you handle your responsibilities, support the people around you, and ik how much you carry each dayy, it doesn’t go unnoticed. Everyone faces their own challenges, but the women like you face themm with courage and handle them. Today is just a small reminder that all of that matters and that the impact you have on the people around you is soooo greatt. I hope you continue doing the things that make you happy, achieving the goals and moving forward with the same confidence and strength you always show! Wishing you a day where you feel appreciated, respected, and proud of everything you’ve done and everything you’re still going to accomplish 🫂🫂🫂
+    </p>
+
+  </div>
+</div>
+
+<script>
+function openCard(card){
+  card.classList.toggle("open");
+}
+</script>
+
+</body>
+</html>
