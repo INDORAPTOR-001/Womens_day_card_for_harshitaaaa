@@ -73,7 +73,7 @@ body{
   color:#444;
   box-shadow:0 10px 30px rgba(0,0,0,0.25);
   z-index:2;
-  transition:top 0.25s ease, height 0.25s ease;
+  transition:top 0.2s ease, height 0.2s ease;
   height:60px;
   overflow:hidden;
 }
@@ -93,7 +93,6 @@ h3{
 </head>
 <body>
 
-<!-- floating flowers -->
 <div class="flower" style="left:10%">🌸</div>
 <div class="flower" style="left:25%; animation-delay:2s">🌷</div>
 <div class="flower" style="left:50%; animation-delay:4s">🌼</div>
@@ -103,75 +102,94 @@ h3{
 <div class="scene">
   <div class="envelope" id="env" onclick="openFlap()">
     <div class="flap"></div>
+
     <div class="letter" id="letter">
       <h3>Happy Women's Day</h3>
       <p>
 Sometimes people don’t say it enough, but the effort, patience, and strength you show everyday really reallllyyyy deserve to be appreciated. Whether it’s the way you handle your responsibilities, support the people around you, and ik how much you carry each dayy, it doesn’t go unnoticed. Everyone faces their own challenges, but the women like you face themm with courage and handle them. Today is just a small reminder that all of that matters and that the impact you have on the people around you is soooo greatt. I hope you continue doing the things that make you happy, achieving the goals and moving forward with the same confidence and strength you always show! Wishing you a day where you feel appreciated, respected, and proud of everything you’ve done and everything you’re still going to accomplish 🫂🫂🫂
       </p>
     </div>
+
   </div>
 </div>
 
 <script>
 const envelope = document.getElementById("env");
 const letter = document.getElementById("letter");
-let flapOpened = false;
-let letterFullyOut = false;
+
+let flapOpened=false;
+let letterFullyOut=false;
 
 function openFlap(){
   if(!flapOpened){
     envelope.classList.add("open");
-    flapOpened = true;
+    flapOpened=true;
   }
 }
 
-let startY = null;
-let letterTop = 220;
-let maxHeight = 600;
+let startY=null;
+let letterTop=220;
+let maxHeight=700;
 
 function moveLetter(dy){
   if(letterFullyOut) return;
-  letterTop += dy;
-  if(letterTop < 40) letterTop = 40;
-  let newHeight = maxHeight - letterTop + 40;
-  if(newHeight > maxHeight) newHeight = maxHeight;
-  letter.style.top = letterTop + "px";
-  letter.style.height = newHeight + "px";
-  if(letterTop === 40) letterFullyOut = true;
+
+  letterTop -= dy;
+
+  if(letterTop < 40){
+    letterTop=40;
+    letterFullyOut=true;
+
+    letter.style.top="40px";
+    letter.style.height="700px";
+    letter.style.overflowY="auto";   // allow scrolling
+    return;
+  }
+
+  let newHeight=maxHeight-letterTop+40;
+
+  letter.style.top=letterTop+"px";
+  letter.style.height=newHeight+"px";
 }
 
-let dragging = false;
+/* mouse */
+let dragging=false;
+
 document.addEventListener("mousedown",(e)=>{
   if(flapOpened){
-    dragging = true;
-    startY = e.clientY;
+    dragging=true;
+    startY=e.clientY;
   }
 });
+
 document.addEventListener("mousemove",(e)=>{
   if(dragging){
-    let dy = e.clientY - startY;
-    startY = e.clientY;
+    let dy=e.clientY-startY;
+    startY=e.clientY;
     moveLetter(dy);
   }
 });
-document.addEventListener("mouseup",()=>{ dragging=false; });
 
+document.addEventListener("mouseup",()=>dragging=false);
+
+/* touch */
 document.addEventListener("touchstart",(e)=>{
   if(flapOpened){
-    dragging = true;
-    startY = e.touches[0].clientY;
+    dragging=true;
+    startY=e.touches[0].clientY;
   }
 });
+
 document.addEventListener("touchmove",(e)=>{
   if(dragging){
-    let dy = e.touches[0].clientY - startY;
-    startY = e.touches[0].clientY;
+    let dy=e.touches[0].clientY-startY;
+    startY=e.touches[0].clientY;
     moveLetter(dy);
-    e.preventDefault();
   }
 });
-document.addEventListener("touchend",()=>{ dragging=false; });
+
+document.addEventListener("touchend",()=>dragging=false);
 
 </script>
 </body>
-    </html>
+</html>
