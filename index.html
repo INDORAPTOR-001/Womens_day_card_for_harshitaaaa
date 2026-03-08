@@ -9,7 +9,7 @@ body{
   font-family:Arial, sans-serif;
   background:#f3f6ff;
   height:100vh;
-  overflow:hidden; /* page won't scroll */
+  overflow:hidden;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -18,7 +18,7 @@ body{
 /* floating flowers */
 .flower{
   position:fixed;
-  font-size:28px;
+  font-size:32px; /* slightly bigger */
   animation:float 12s linear infinite;
 }
 @keyframes float{
@@ -34,8 +34,8 @@ body{
 /* envelope */
 .envelope{
   position:relative;
-  width:520px;
-  height:320px;
+  width:600px;  /* bigger */
+  height:380px; /* bigger */
   background:#d46aa5;
   border-radius:12px;
   box-shadow:0 10px 35px rgba(0,0,0,0.25);
@@ -52,9 +52,9 @@ body{
   left:0;
   width:0;
   height:0;
-  border-left:260px solid transparent;
-  border-right:260px solid transparent;
-  border-top:190px solid #c0548f;
+  border-left:300px solid transparent;
+  border-right:300px solid transparent;
+  border-top:220px solid #c0548f;
   transform-origin:top;
   transition:0.6s;
   z-index:3;
@@ -67,25 +67,24 @@ body{
 /* letter */
 .letter{
   position:relative;
-  width:460px;
+  width:520px;  /* bigger */
   background:white;
-  margin-top:230px; /* start hidden inside envelope */
-  padding:35px;
+  margin-top:280px; /* start hidden */
+  padding:40px;      /* more padding */
   box-sizing:border-box;
   border-radius:10px;
   text-align:center;
-  line-height:1.6;
+  line-height:1.8; /* more readable */
   color:#444;
   box-shadow:0 10px 25px rgba(0,0,0,0.2);
-  font-size:18px;
-  height:0; /* collapsed initially */
-  overflow-y:hidden; /* only scroll when fully expanded */
+  font-size:22px; /* bigger text */
+  height:0;
+  overflow-y:hidden;
   transition:height 0.5s ease, margin-top 0.5s ease;
 }
 
-/* scrollable class */
 .letter.open{
-  height:400px; /* how tall the letter can expand */
+  height:500px;   /* bigger letter height */
   overflow-y:auto;
   margin-top:40px; /* fully pulled out */
 }
@@ -93,6 +92,7 @@ body{
 h3{
   margin-top:0;
   color:#7a2c5c;
+  font-size:28px; /* bigger heading */
 }
 
 </style>
@@ -124,7 +124,7 @@ const letter = document.getElementById("letter");
 
 function openLetter(){
   envelope.classList.add("open");
-  letter.classList.add("open"); // expands letter and enables internal scroll
+  letter.classList.add("open"); // expands letter and enables scroll
 }
 </script>
 
